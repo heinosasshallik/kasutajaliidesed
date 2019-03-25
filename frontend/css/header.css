@@ -1,6 +1,4 @@
 .header {
-  background-color: #156677;
-  height: 100px;
   color: white;
 }
 
@@ -9,18 +7,12 @@
 }
 
 .shopping-cart-image {
-  height: auto;
   cursor: pointer;
 }
 
 .shopping-cart-container {
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  align-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+  color: white;
+  margin-left: 20px;
 }
 
 .search-and-category-container {
@@ -29,7 +21,7 @@
 
 .search-container {
   background-color: white;
-  width: 100%;
+  /*width: 100%;*/
   height: 40px;
   border-radius: 5px;
   margin-top: 15px;
@@ -52,7 +44,7 @@
 textarea, select, input, button { outline: none; }
 
 .search-button {
-  width: 70px;
+  width: 50px;
   padding: 10px;
   background: #2196F3;
   color: white;
@@ -61,6 +53,10 @@ textarea, select, input, button { outline: none; }
   border-left: none;
   border-radius: 0px 5px 5px 0px;
   cursor: pointer;
+}
+
+.form-control {
+  border: 0px solid grey !important;
 }
 
 .nav-button {

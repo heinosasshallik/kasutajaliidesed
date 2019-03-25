@@ -11,3 +11,8 @@
 .genre-list {
   margin-top: 15px;
 }
+
+.product-card {
+  padding: 0px !important;
+  margin: 0px !important;
+}
