@@ -16,3 +16,8 @@
   padding: 0px !important;
   margin: 0px !important;
 }
+
+.card-link,
+.card-link:hover {
+  color: inherit;
+}
