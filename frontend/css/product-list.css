@@ -1,0 +1,13 @@
+.genre-button {
+  background-color: #3fb5ff;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border: lightgray solid 1px;
+}
+
+.genre-list {
+  margin-top: 15px;
+}
