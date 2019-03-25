@@ -1,0 +1,12 @@
+.heading {
+  border-bottom: 1px solid lightgrey;
+}
+
+.product-container {
+  padding: 0 !important;
+}
+
+.product-image {
+  width: inherit !important;
+  height: inherit !important;
+}
