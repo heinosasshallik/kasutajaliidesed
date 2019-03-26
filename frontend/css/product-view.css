@@ -2,8 +2,9 @@
   border-bottom: 1px solid lightgrey;
 }
 
-.product-container {
+.no-padding-margin {
   padding: 0 !important;
+  margin: 0 !important;
 }
 
 .product-image {
