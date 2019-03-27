@@ -21,3 +21,7 @@
 .card-link:hover {
   color: inherit;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
