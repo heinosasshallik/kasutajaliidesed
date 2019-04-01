@@ -1,3 +1,5 @@
+@import "global";
+
 .header {
   color: white;
 }
@@ -24,12 +26,12 @@
   height: 40px;
   border-radius: 5px;
   margin-top: 15px;
-  display: flex;
+  display:  flex;
   flex-direction: row;
 }
 
 .search:hover, .search-container:hover {
-  background-color: #e4e4e4;
+  background-color : #e4e4e4;
 }
 
 .search {
@@ -40,9 +42,7 @@
   width: 97%;
 }
 
-textarea, select, input, button {
-  outline: none;
-}
+textarea, select, input, button { outline: none; }
 
 .search-button {
   width: 50px;
@@ -76,5 +76,3 @@ textarea, select, input, button {
 .shopping-cart-text:hover {
   color: white !important;
 }
-
-/*# sourceMappingURL=header.css.map */
