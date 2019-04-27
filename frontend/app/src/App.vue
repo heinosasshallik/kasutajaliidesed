@@ -1,5 +1,8 @@
 <template>
     <div id="app">
+        <Header />
+        <router-view></router-view>
+        <!--
         <navigation-drawer />
 
         <transition name="fade">
@@ -17,6 +20,7 @@
         </transition>
 
         <modal />
+        -->
     </div>
 </template>
 
@@ -26,6 +30,7 @@
     import Footer from "./components/layout/Footer";
     import NavigationDrawer from "./components/layout/NavigationDrawer";
     import Modal from "./components/modal/Modal";
+    import Header from "./components/layout/Header";
 
     export default {
         name: 'app',
@@ -33,7 +38,8 @@
             Modal,
             NavigationDrawer,
             Footer,
-            Navigation
+            Navigation,
+            Header
         }
     }
 </script>
