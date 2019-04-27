@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HomeView from './views/HomeView.vue';
+import ProductListView from './views/ProductListView.vue';
+import ProductView from './views/ProductView.vue';
+import SellView from './views/SellView.vue';
+import CartView from './views/CartView.vue';
+import SellConfirmView from './views/SellConfirmView.vue';
 import QuestionDetailView from './views/QuestionDetailView.vue';
 import QuestionListView from './views/QuestionListView.vue';
 import AddQuestionView from './views/AddQuestionView.vue';
@@ -13,11 +17,31 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'HomeView',
-            component: HomeView,
+            name: 'ProductListView',
+            component: ProductListView,
             meta: {
                 layout: 'full',
             }
+        },
+        {
+          name: 'ProductView',
+          path: '/product/:id',
+          component: ProductView
+        },
+        {
+          name: 'SellView',
+          path: '/sell',
+          component: SellView
+        },
+        {
+          name: 'SellConfirmView',
+          path: '/sell/confirm',
+          component: SellConfirmView
+        },
+        {
+          name: 'CartView',
+          path: '/cart',
+          component: CartView
         },
         {
             path: '/questions/create',
