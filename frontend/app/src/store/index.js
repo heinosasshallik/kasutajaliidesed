@@ -4,6 +4,7 @@ import question from './modules/question';
 import navigation from './modules/navigation';
 import modal from './modules/modal';
 import auth from './modules/auth';
+import product from './modules/product';
 
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
         navigation,
         modal,
         auth,
+        product,
     },
     strict: debug
 });
