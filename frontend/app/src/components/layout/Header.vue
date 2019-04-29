@@ -5,16 +5,16 @@
           aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon text-dark">-</span>
         </button>
-        <img @click="$router.push({name: 'HomeView'})" alt="logo" class="logo d-none d-md-block" src="@/assets/images/logo.png">
+        <img @click="$router.push({name: 'ProductListView'})" alt="logo" class="logo d-none d-md-block" src="@/assets/images/logo.png">
       
       
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="index.html">Mängud <span class="sr-only">(current)</span></a>
+              <a class="nav-link" v-bind:href="'/'">Mängud <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="sell.html">Müük</a>
+              <a class="nav-link" v-bind:href="'/sell'">Müük</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Kontakt</a>
