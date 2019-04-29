@@ -5,47 +5,27 @@
       <h1 class="col display-4 heading mt-3 pb-2">Ostukäru</h1>
       <div class="col-xl-2"></div>
     </div>
-    <div class="row">
+    <div class="text-center pt-4" v-if="cart.length == 0">
+      Tooted puuduvad.
+    </div>
+    <div class="row" v-for="product in cart" v-bind:key="product.id">
       <div class="col-xl-2"></div>
       <div class="col container-fluid no-padding-margin border-bottom-grey pb-2">
         <div class="row no-padding-margin">
           <div class="col-12 col-sm-4 col-md-3 col-lg-2 no-padding-margin">
-            <img alt="product" class="product-image pl-sm-3 pl-xl-0" src="https://upload.wikimedia.org/wikipedia/en/thumb/2/23/Hltob-win-cover.jpg/220px-Hltob-win-cover.jpg">
+            <img alt="product" class="product-image pl-sm-3 pl-xl-0" v-bind:src="product.image">
           </div>
           <div class="col-12 col-sm-8 col-md-9 col-lg-10 py-3">
             <div class="container-fluid">
               <div class="row">
-                <div class="col h1 d-flex align-items-center">Team fortress 2</div>
+                <div class="col h1 d-flex align-items-center">{{ product.name }}</div>
                 <div class="col d-flex align-items-center font-weight-light justify-content-end">Tarne 7-14 päeva</div>
               </div>
               <div class="row">
-                <div class="col h5 text-success d-flex align-items-center">9.99€</div>
-                <div class="col d-flex align-items-center font-weight-light text-muted cursor-pointer justify-content-end"><u>Eemalda toode</u></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-2"></div>
-    </div>
-
-    <div class="row">
-      <div class="col-xl-2"></div>
-      <div class="col container-fluid no-padding-margin border-bottom-grey pb-2">
-        <div class="row no-padding-margin">
-          <div class="col-12 col-sm-4 col-md-3 col-lg-2 no-padding-margin">
-            <img alt="product" class="product-image pl-sm-3 pl-xl-0" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Homm3boxart.jpg/220px-Homm3boxart.jpg">
-          </div>
-          <div class="col-12 col-sm-8 col-md-9 col-lg-10">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col h1 d-flex align-items-center">Heroes of Might and Magic 3</div>
-                <div class="col d-flex align-items-center font-weight-light justify-content-end">Tarne 7-14 päeva</div>
-              </div>
-              <div class="row">
-                <div class="col h5 text-success d-flex align-items-center">9.99€</div>
-                <div class="col d-flex align-items-center font-weight-light text-muted cursor-pointer justify-content-end"><u>Eemalda
-                    toode</u></div>
+                <div class="col h5 text-success d-flex align-items-center">{{ product.price }}</div>
+                <div class="col d-flex align-items-center font-weight-light text-muted cursor-pointer justify-content-end">
+                  <u @click="removeFromCart(product)">Eemalda toode</u>
+                </div>
               </div>
             </div>
           </div>
@@ -55,7 +35,7 @@
     </div>
 
 
-    <div class="row mt-3  ">
+    <div class="row mt-3" v-if="cart.length != 0">
       <div class="col-xl-2"></div>
       <form class="d-flex justify-content-between col-xl-8 col-12 px-sm-3 px-xl-0">
         <div class="form-group pl-sm-3 pl-xl-0">
@@ -70,8 +50,6 @@
         <div class="d-flex align-items-center">
           <button class="btn btn-success">Osta</button>
         </div>
-        
-        
       </form>
       <div class="col-xl-2"></div>
     </div>
@@ -82,24 +60,16 @@
 <script>
     import QuestionFilterSearch from "../components/questions/filters/QuestionFilterSearch";
     import Navigation from "../components/layout/Navigation";
-    import {mapState} from "vuex";
+    import {mapState, mapActions} from "vuex";
 
     export default {
-        name: "HomeView",
-        components: {
-            Navigation,
-            QuestionFilterSearch
-        },
-        computed: {
-            ...mapState('auth', ['isLoggedIn']),
-        },
-        methods: {
-            startSearch() {
-                this.$router.push({
-                    name: 'QuestionListView'
-                });
-            }
-        }
+      name: "HomeView",
+      computed: {
+        ...mapState('product', ['cart']),
+      },
+      methods: {
+        ...mapActions('product', ['removeFromCart']),
+      }
     }
 </script>
 

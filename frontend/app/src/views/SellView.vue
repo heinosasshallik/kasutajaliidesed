@@ -16,10 +16,11 @@
                 <label class="mt-3">Kirjuta siia mängu nimi ning me pakume sulle hinna</label>
               </div>    
               <div class="row">
-                <input class="border rounded col py-2" type="text" placeholder="Mängu nimi">
+                <input v-model="gameName" class="border rounded col py-2" type="text" placeholder="Mängu nimi">
               </div>
               <div class="row mt-2">
-                <span class="text-success h3">15€</span>
+                <span class="text-success h3">{{ price }}€</span>
+                
               </div>
               <div class="row mt-2 align-items-center">
                 <label class="col-4 no-padding-margin">Email:</label>
@@ -39,8 +40,8 @@
       <div class="row">
         <div class="col-xl-2"></div>
         <form class="d-flex justify-content-between col-xl-8 col-12 no-padding-margin">
-          <div class="d-flex align-items-center mr-sm-3 mr-xl-0">
-            <a href="sell-confirm.html"><p class="btn btn-success">Valmis müümiseks</p></a>
+          <div class="d-flex align-items-center ml-sm-2 mr-sm-3 mr-xl-0">
+            <a @click="confirm()"><p class="btn btn-success">Valmis müümiseks</p></a>
           </div>
         </form>
         <div class="col-xl-2"></div>
@@ -49,25 +50,30 @@
 </template>
 
 <script>
+    //import {CubeSpin} from 'vue-loading-spinner'
+
     import QuestionFilterSearch from "../components/questions/filters/QuestionFilterSearch";
     import Navigation from "../components/layout/Navigation";
     import {mapState} from "vuex";
 
     export default {
         name: "HomeView",
-        components: {
-            Navigation,
-            QuestionFilterSearch
+        data() {
+          return {
+            gameName: "",
+            price: 0,
+            loadingPrice: false,
+          }
         },
         computed: {
-            ...mapState('auth', ['isLoggedIn']),
+          ...mapState('auth', ['isLoggedIn']),
         },
         methods: {
-            startSearch() {
-                this.$router.push({
-                    name: 'QuestionListView'
-                });
-            }
+          confirm() {
+            this.$router.push({
+              name: 'SellConfirmView'
+            });
+          }
         }
     }
 </script>

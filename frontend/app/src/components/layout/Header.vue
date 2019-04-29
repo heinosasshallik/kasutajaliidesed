@@ -11,10 +11,10 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" v-bind:href="'/'">Mängud <span class="sr-only">(current)</span></a>
+              <a class="nav-link" @click="$router.push({name: 'ProductListView'})">Mängud <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" v-bind:href="'/sell'">Müük</a>
+              <a class="nav-link" @click="$router.push({name: 'SellView'})">Müük</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Kontakt</a>
@@ -32,17 +32,24 @@
         </form>
       
         <div class="ml-3">
-          <a href="cart.html"><img alt="cart" class="shopping-cart-image" src="@/assets/images/shopping-cart.png"><span
-              class="shopping-cart-text"> (1)</span></a>
+          <a @click="$router.push({name: 'CartView'})"><img alt="cart" class="shopping-cart-image" src="@/assets/images/shopping-cart.png"><span
+              class="shopping-cart-text"> ({{cart.length}})</span></a>
         </div>
       </nav>
     </div>
 </template>
 
 <script>
+    import {mapState} from "vuex";
+
+
     export default {
-        name: "Header"
+        name: "Header",
+        computed: {
+          ...mapState('product', ['cart']),
+        }
     }
+    
 </script>
 
 <style scoped>

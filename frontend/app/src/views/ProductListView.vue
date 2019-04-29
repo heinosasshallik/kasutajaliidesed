@@ -2,109 +2,31 @@
   <div class="container-fluid mt-xl-2">
     <div class="row">
       <div class="col-xl-2"></div>
-      <button type="button" class="btn btn-outline-secondary col-12 col-sm">Strateegia</button>
-      <button type="button" class="btn btn-outline-secondary col-12 col-sm">Action</button>
-      <button type="button" class="btn btn-outline-secondary col-12 col-sm">FPS</button>
-      <button type="button" class="btn btn-outline-secondary col-12 col-sm">RPG</button>
-      <button type="button" class="btn btn-outline-secondary col-12 col-sm">Indie</button>
-      <button type="button" class="btn btn-outline-secondary col-12 col-sm">Võidusõit</button>
+      <button type="button" class="btn btn-outline-secondary col-12 col-sm" @click="updateProducts()">Kõik</button>
+      <button type="button" class="btn btn-outline-secondary col-12 col-sm" @click="updateProducts('strategy')">Strateegia</button>
+      <button type="button" class="btn btn-outline-secondary col-12 col-sm" @click="updateProducts('action')">Action</button>
+      <button type="button" class="btn btn-outline-secondary col-12 col-sm" @click="updateProducts('fps')">FPS</button>
+      <button type="button" class="btn btn-outline-secondary col-12 col-sm" @click="updateProducts('rpg')">RPG</button>
+      <button type="button" class="btn btn-outline-secondary col-12 col-sm" @click="updateProducts('indie')">Indie</button>
+      <button type="button" class="btn btn-outline-secondary col-12 col-sm" @click="updateProducts('racing')">Võidusõit</button>
       <div class="col-xl-2"></div>
     </div>
-    <div class="row">
+    <div class="text-center pt-4" v-if="dividedProducts.length == 0">
+      Tooted puuduvad.
+    </div>
+    <div class="row" v-for="fourProducts in dividedProducts" v-bind:key="fourProducts[0].id">
       <div class="col-xl-2"></div>
       <div class="card product-card col-lg-3 col-xl-2 col-sm-6 mt-xl-2 cursor-pointer"
-          onclick="window.location.href='product-view.html'">
-        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/thumb/2/23/Hltob-win-cover.jpg/220px-Hltob-win-cover.jpg"
+          v-for="product in fourProducts" 
+          v-bind:key="product.id"
+          @click="$router.push({name: 'ProductView', params: {id: product.id}})">
+        <img class="card-img-top" v-bind:src="product.image"
           alt="Card image cap">
         <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Team fortress 2</h5>
+          <h5 class="card-title">{{ product.name }}</h5>
           <div class="mt-auto d-flex justify-content-between">
-            <small class="card-text text-success">9.99€</small>
-            <small class="card-text text-muted">FPS</small>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="card product-card col-lg-3 col-xl-2 col-sm-6 mt-xl-2">
-        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Homm3boxart.jpg/220px-Homm3boxart.jpg" alt="Card image cap">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Heroes of Might and Magic 3</h5>
-          <div class="mt-auto d-flex justify-content-between">
-            <small class="card-text text-success">9.99€</small>
-            <small class="card-text text-muted">Strateegia</small>
-          </div>
-        </div>
-      </div>
-      <div class="card product-card col-lg-3 col-xl-2 col-sm-6 mt-xl-2">
-        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/61/Silver_Coverart.png/220px-Silver_Coverart.png"
-          alt="Card image cap">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Silver</h5>
-          <div class="mt-auto d-flex justify-content-between">
-            <small class="card-text text-success">9.99€</small>
-            <small class="card-text text-muted">RPG</small>
-          </div>
-        </div>
-      </div>
-      <div class="card product-card col-lg-3 col-xl-2 col-sm-6 mt-xl-2">
-        <img class="card-img-top product-image" src="https://d1k5w7mbrh6vq5.cloudfront.net/images/cache/49/db/dd/49dbdd31c690e9e7fbe6dc9fb7cd9855.jpg"
-          alt="Card image cap">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Defender</h5>
-          <div class="mt-auto d-flex justify-content-between">
-            <small class="card-text text-success">9.99€</small>
-            <small class="card-text text-muted">Indie</small>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-2"></div>
-    </div>
-    <div class="row">
-      <div class="col-xl-2"></div>
-      <div class="card product-card col-lg-3 col-xl-2 col-sm-6 mt-xl-2 cursor-pointer" onclick="window.location.href='product-view.html'">
-        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/thumb/2/23/Hltob-win-cover.jpg/220px-Hltob-win-cover.jpg"
-          alt="Card image cap">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Team fortress 2</h5>
-          <div class="mt-auto d-flex justify-content-between">
-            <small class="card-text text-success">9.99€</small>
-            <small class="card-text text-muted">FPS</small>
-          </div>
-    
-        </div>
-      </div>
-    
-      <div class="card product-card col-lg-3 col-xl-2 col-sm-6 mt-xl-2">
-        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Homm3boxart.jpg/220px-Homm3boxart.jpg"
-          alt="Card image cap">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Heroes of Might and Magic 3</h5>
-          <div class="mt-auto d-flex justify-content-between">
-            <small class="card-text text-success">9.99€</small>
-            <small class="card-text text-muted">Strateegia</small>
-          </div>
-        </div>
-      </div>
-      <div class="card product-card col-lg-3 col-xl-2 col-sm-6 mt-xl-2">
-        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/61/Silver_Coverart.png/220px-Silver_Coverart.png"
-          alt="Card image cap">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Silver</h5>
-          <div class="mt-auto d-flex justify-content-between">
-            <small class="card-text text-success">9.99€</small>
-            <small class="card-text text-muted">RPG</small>
-          </div>
-        </div>
-      </div>
-      <div class="card product-card col-lg-3 col-xl-2 col-sm-6 mt-xl-2">
-        <img class="card-img-top product-image" src="https://d1k5w7mbrh6vq5.cloudfront.net/images/cache/49/db/dd/49dbdd31c690e9e7fbe6dc9fb7cd9855.jpg"
-          alt="Card image cap">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Defender</h5>
-          <div class="mt-auto d-flex justify-content-between">
-            <small class="card-text text-success">9.99€</small>
-            <small class="card-text text-muted">Indie</small>
+            <small class="card-text text-success">{{ product.price }}</small>
+            <small class="card-text text-muted">{{ product.category }}</small>
           </div>
         </div>
       </div>
@@ -114,25 +36,18 @@
 </template>
 
 <script>
-    import QuestionFilterSearch from "../components/questions/filters/QuestionFilterSearch";
-    import Navigation from "../components/layout/Navigation";
-    import {mapState} from "vuex";
+    import {mapState, mapGetters, mapActions} from "vuex";
 
     export default {
-        name: "HomeView",
-        components: {
-            Navigation,
-            QuestionFilterSearch
-        },
+        name: "ProductListView",
         computed: {
-            ...mapState('auth', ['isLoggedIn']),
+          ...mapGetters('product', ['dividedProducts']),
         },
         methods: {
-            startSearch() {
-                this.$router.push({
-                    name: 'QuestionListView'
-                });
-            }
+          ...mapActions('product', ['updateProducts'])
+        },
+        created() {
+          this.updateProducts();
         }
     }
 </script>
