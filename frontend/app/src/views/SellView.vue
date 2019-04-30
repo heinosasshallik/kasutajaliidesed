@@ -12,11 +12,23 @@
         <form class="col-xl-8 col-12">
           <div class="form-group px-sm-3 px-xl-0">
             <div class="container-fluid"></div>
+              <div v-if="errors.length" class="row">
+                <p>
+                  <b>Palun paranda järgnevad vead:</b>
+                  <ul>
+                    <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+                  </ul>
+                </p>
+              </div>
               <div class="row">
                 <label class="mt-3">Kirjuta siia mängu nimi ning me pakume sulle hinna</label>
               </div>    
               <div class="row">
-                <input v-model="gameName" class="border rounded col py-2" type="text" placeholder="Mängu nimi">
+                <model-select :options="options"
+                                v-model="item"
+                                placeholder="Vali mäng"
+                                >
+                 </model-select>
               </div>
               <div class="row mt-2">
                 <span class="text-success h3">{{ price }}€</span>
@@ -24,11 +36,11 @@
               </div>
               <div class="row mt-2 align-items-center">
                 <label class="col-4 no-padding-margin">Email:</label>
-                <input class="border rounded col py-2" type="text" placeholder="Email">
+                <input v-model="email" class="border rounded col py-2" type="text" placeholder="Email">
               </div>
               <div class="row mt-1 align-items-center">
                 <label class="col-4 no-padding-margin">Pangakonto:</label>
-                <input class="border rounded col py-2" type="text" placeholder="Pangakonto">
+                <input v-model="bankAccount" class="border rounded col py-2" type="text" placeholder="Pangakonto">
               </div>
             </div>
           </form>
@@ -50,31 +62,87 @@
 </template>
 
 <script>
-    //import {CubeSpin} from 'vue-loading-spinner'
+  import { ModelSelect } from 'vue-search-select'
 
     import QuestionFilterSearch from "../components/questions/filters/QuestionFilterSearch";
     import Navigation from "../components/layout/Navigation";
-    import {mapState} from "vuex";
+    import {mapState, mapActions, mapGetters} from "vuex";
 
     export default {
         name: "HomeView",
+        components: {
+          ModelSelect
+        },
         data() {
           return {
+            options: [],
+            item: {
+              value: 0,
+              text: ''
+            },
             gameName: "",
             price: 0,
-            loadingPrice: false,
+            email: "",
+            bankAccount: "",
+            errors: [],
+          }
+        },
+        watch: {
+          item: {
+            handler(newItem, oldItem) {
+              if (newItem.value !== oldItem.value) {
+                this.updatePrice();
+              }
+            },
+            deep: true,
           }
         },
         computed: {
-          ...mapState('auth', ['isLoggedIn']),
+          ...mapState('product', ['products']),
+          ...mapGetters('product', ['getProductById']),
         },
         methods: {
+          ...mapActions('product', ['updateProducts']),
           confirm() {
-            this.$router.push({
-              name: 'SellConfirmView'
-            });
+            if (this.checkForm()) {
+              this.$router.push({
+                name: 'SellConfirmView'
+              });
+            }
+          },
+          updatePrice() {
+            this.price = (parseFloat(this.getProductById(this.item.value).price.slice(0, -1)) * 0.8).toFixed(2);
+          },
+          validateEmail(email) {
+              const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+              return re.test(String(email).toLowerCase());
+          },
+          checkForm: function () {
+            this.errors = [];
+
+            if (!(this.item && this.item.value)) {
+              this.errors.push('Mängu valimine on nõutud.');
+            }
+            if (!this.email || !this.validateEmail(this.email)) {
+              this.errors.push('Email ei ole korrektne.');
+            } if (!this.bankAccount || this.bankAccount.length == 0) {
+              this.errors.push('Pangakonto on nõutud.');
+            }
+
+            return this.errors.length == 0;
           }
+        
+        },
+        created() {
+          this.updateProducts();
+          this.products.forEach(product => {
+            this.options.push({
+              value: product.id,
+              text: product.name
+            });
+          });
         }
+
     }
 </script>
 

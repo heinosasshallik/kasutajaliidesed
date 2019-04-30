@@ -28,7 +28,7 @@
       
         <form class="form-inline">
           <input class="form-control mr-sm-2" type="search" placeholder="Otsi..." aria-label="Search">
-          <button class="btn btn-outline-warning my-2 my-sm-0 d-none d-sm-block" type="submit">Otsing</button>
+          <div class="btn btn-outline-warning my-2 my-sm-0 d-none d-sm-block cursor-pointer">Otsing</div>
         </form>
       
         <div class="ml-3">

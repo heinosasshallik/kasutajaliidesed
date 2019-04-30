@@ -8,6 +8,7 @@ import SellConfirmView from './views/SellConfirmView.vue';
 import QuestionDetailView from './views/QuestionDetailView.vue';
 import QuestionListView from './views/QuestionListView.vue';
 import AddQuestionView from './views/AddQuestionView.vue';
+import ThankYouView from './views/ThankYouView.vue';
 
 Vue.use(Router);
 
@@ -59,5 +60,11 @@ export default new Router({
             path: '/question/:id',
             component: QuestionDetailView
         },
+        {
+          name: 'ThankYouView',
+          path: '/thanks',
+          component: ThankYouView
+        },
+
     ]
 });

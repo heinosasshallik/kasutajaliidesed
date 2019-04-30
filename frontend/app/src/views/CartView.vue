@@ -48,7 +48,7 @@
           </select>
         </div>
         <div class="d-flex align-items-center">
-          <button class="btn btn-success">Osta</button>
+          <button class="btn btn-success" @click="buy">Osta</button>
         </div>
       </form>
       <div class="col-xl-2"></div>
@@ -69,6 +69,15 @@
       },
       methods: {
         ...mapActions('product', ['removeFromCart']),
+        buy() {
+          this.removeAllProductsFromCart();
+          this.$router.push({name: 'ThankYouView'});
+        },
+        removeAllProductsFromCart() {
+          this.cart.forEach(product => {
+            this.removeFromCart(product);
+          });
+        }
       }
     }
 </script>
