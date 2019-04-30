@@ -29,16 +29,10 @@
 </template>
 
 <script>
-    import QuestionFilterSearch from "../components/questions/filters/QuestionFilterSearch";
-    import Navigation from "../components/layout/Navigation";
     import {mapGetters, mapActions} from "vuex";
 
     export default {
-        name: "HomeView",
-        components: {
-          Navigation,
-          QuestionFilterSearch
-        },
+        name: "ProductView",
         computed: {
           ...mapGetters('product', ['getProductById']),
         },
@@ -62,8 +56,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../assets/styles/_colors.scss';
-  @import '../assets/styles/_mixins.scss';
 
   .product-image {
     display: block;

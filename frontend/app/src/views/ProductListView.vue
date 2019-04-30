@@ -53,9 +53,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../assets/styles/_colors.scss';
-  @import '../assets/styles/_mixins.scss';
-
   .genre-button {
     background-color: #3fb5ff;
     display: flex;

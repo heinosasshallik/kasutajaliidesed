@@ -63,91 +63,84 @@
 
 <script>
   import { ModelSelect } from 'vue-search-select'
+  import {mapState, mapActions, mapGetters} from "vuex";
 
-    import QuestionFilterSearch from "../components/questions/filters/QuestionFilterSearch";
-    import Navigation from "../components/layout/Navigation";
-    import {mapState, mapActions, mapGetters} from "vuex";
-
-    export default {
-        name: "HomeView",
-        components: {
-          ModelSelect
+  export default {
+    name: "SellView",
+    components: {
+      ModelSelect
+    },
+    data() {
+      return {
+        options: [],
+        item: {
+          value: 0,
+          text: ''
         },
-        data() {
-          return {
-            options: [],
-            item: {
-              value: 0,
-              text: ''
-            },
-            gameName: "",
-            price: 0,
-            email: "",
-            bankAccount: "",
-            errors: [],
+        gameName: "",
+        price: 0,
+        email: "",
+        bankAccount: "",
+        errors: [],
+      }
+    },
+    watch: {
+      item: {
+        handler(newItem, oldItem) {
+          if (newItem.value !== oldItem.value) {
+            this.updatePrice();
           }
         },
-        watch: {
-          item: {
-            handler(newItem, oldItem) {
-              if (newItem.value !== oldItem.value) {
-                this.updatePrice();
-              }
-            },
-            deep: true,
-          }
-        },
-        computed: {
-          ...mapState('product', ['products']),
-          ...mapGetters('product', ['getProductById']),
-        },
-        methods: {
-          ...mapActions('product', ['updateProducts']),
-          confirm() {
-            if (this.checkForm()) {
-              this.$router.push({
-                name: 'SellConfirmView'
-              });
-            }
-          },
-          updatePrice() {
-            this.price = (parseFloat(this.getProductById(this.item.value).price.slice(0, -1)) * 0.8).toFixed(2);
-          },
-          validateEmail(email) {
-              const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-              return re.test(String(email).toLowerCase());
-          },
-          checkForm: function () {
-            this.errors = [];
-
-            if (!(this.item && this.item.value)) {
-              this.errors.push('Mängu valimine on nõutud.');
-            }
-            if (!this.email || !this.validateEmail(this.email)) {
-              this.errors.push('Email ei ole korrektne.');
-            } if (!this.bankAccount || this.bankAccount.length == 0) {
-              this.errors.push('Pangakonto on nõutud.');
-            }
-
-            return this.errors.length == 0;
-          }
-        
-        },
-        created() {
-          this.updateProducts();
-          this.products.forEach(product => {
-            this.options.push({
-              value: product.id,
-              text: product.name
-            });
+        deep: true,
+      }
+    },
+    computed: {
+      ...mapState('product', ['products']),
+      ...mapGetters('product', ['getProductById']),
+    },
+    methods: {
+      ...mapActions('product', ['updateProducts']),
+      confirm() {
+        if (this.checkForm()) {
+          this.$router.push({
+            name: 'SellConfirmView'
           });
         }
+      },
+      updatePrice() {
+        this.price = (parseFloat(this.getProductById(this.item.value).price.slice(0, -1)) * 0.8).toFixed(2);
+      },
+      validateEmail(email) {
+          const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(String(email).toLowerCase());
+      },
+      checkForm: function () {
+        this.errors = [];
 
+        if (!(this.item && this.item.value)) {
+          this.errors.push('Mängu valimine on nõutud.');
+        }
+        if (!this.email || !this.validateEmail(this.email)) {
+          this.errors.push('Email ei ole korrektne.');
+        } if (!this.bankAccount || this.bankAccount.length == 0) {
+          this.errors.push('Pangakonto on nõutud.');
+        }
+
+        return this.errors.length == 0;
+      }
+    
+    },
+    created() {
+      this.updateProducts();
+      this.products.forEach(product => {
+        this.options.push({
+          value: product.id,
+          text: product.name
+        });
+      });
     }
+  }
 </script>
 
 <style lang="scss" scoped>
-  @import '../assets/styles/_colors.scss';
-  @import '../assets/styles/_mixins.scss';
-
 </style>

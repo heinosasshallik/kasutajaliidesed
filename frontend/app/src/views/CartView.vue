@@ -58,34 +58,24 @@
 </template>
 
 <script>
-    import QuestionFilterSearch from "../components/questions/filters/QuestionFilterSearch";
-    import Navigation from "../components/layout/Navigation";
     import {mapState, mapActions} from "vuex";
 
     export default {
-      name: "HomeView",
+      name: "CartView",
       computed: {
         ...mapState('product', ['cart']),
       },
       methods: {
-        ...mapActions('product', ['removeFromCart']),
+        ...mapActions('product', ['emptyCart']),
         buy() {
-          this.removeAllProductsFromCart();
+          this.emptyCart();
           this.$router.push({name: 'ThankYouView'});
         },
-        removeAllProductsFromCart() {
-          this.cart.forEach(product => {
-            this.removeFromCart(product);
-          });
-        }
       }
     }
 </script>
 
 <style lang="scss" scoped>
-  @import '../assets/styles/_colors.scss';
-  @import '../assets/styles/_mixins.scss';
-
   .border-bottom-grey {
     border-bottom: 1px solid lightgrey;
   }

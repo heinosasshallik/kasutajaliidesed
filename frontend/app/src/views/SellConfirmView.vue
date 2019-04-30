@@ -35,16 +35,10 @@
 </template>
 
 <script>
-    import QuestionFilterSearch from "../components/questions/filters/QuestionFilterSearch";
-    import Navigation from "../components/layout/Navigation";
     import {mapState} from "vuex";
 
     export default {
-        name: "HomeView",
-        components: {
-            Navigation,
-            QuestionFilterSearch
-        },
+        name: "SellConfirmView",
         computed: {
             ...mapState('auth', ['isLoggedIn']),
         },
@@ -59,6 +53,4 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../assets/styles/_colors.scss';
-  @import '../assets/styles/_mixins.scss';
 </style>
