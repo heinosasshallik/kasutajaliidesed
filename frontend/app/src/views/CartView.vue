@@ -66,7 +66,7 @@
         ...mapState('product', ['cart']),
       },
       methods: {
-        ...mapActions('product', ['emptyCart']),
+        ...mapActions('product', ['emptyCart', 'removeFromCart']),
         buy() {
           this.emptyCart();
           this.$router.push({name: 'ThankYouView'});

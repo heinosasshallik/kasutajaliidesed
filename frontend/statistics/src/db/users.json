@@ -1,0 +1,36 @@
+{
+  "labels": [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ],
+  "datasets": [
+    {
+      "label": "Users registered",
+      "backgroundColor": "#000ff",
+      "data": [
+        31,
+        23,
+        34,
+        30,
+        37,
+        51,
+        62,
+        93,
+        90,
+        66,
+        29,
+        35
+      ]
+    }
+  ]
+}

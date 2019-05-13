@@ -1,0 +1,24 @@
+{
+  "labels": [
+    "Strateegia",
+    "Action",
+    "RPG",
+    "FPS",
+    "Indie",
+    "Võidusõit"
+  ],
+  "datasets": [
+    {
+      "label": "Number of games in category",
+      "backgroundColor": ["#41B883", "#E46651", "#00D8FF", "#cc6394", "#9a9714", "#a9a99a9a9"],
+      "data": [
+        51,
+        62,
+        93,
+        90,
+        66,
+        29
+      ]
+    }
+  ]
+}
