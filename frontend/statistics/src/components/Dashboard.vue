@@ -1,13 +1,35 @@
 <template>
   <div>
-    <h1>Dashboard</h1>
-    <div class="small">
-      Game sales this month:
-      <line-chart class="space" :chart-data="salesDataCollection"></line-chart>
-      Users registered per month:
-      <bar-chart class="space" :chart-data="usersDataCollection"></bar-chart>
-      Number of games per category:
-      <pie-chart class="space" :chart-data="categoriesDataCollection"></pie-chart>
+    <div class="header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-2">
+            <img alt="logo" class="logo d-none d-md-block" src="@/assets/logo.png">
+          </div>
+          <div class="col text-align-center">
+            <h1>Dashboard</h1>
+          </div>
+          <div class="col-2"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container-fluid">
+      <div  class="row">
+        <div class="col-4">
+          
+          Game sales this month:
+          <line-chart class="space" :chart-data="salesDataCollection"></line-chart>
+        </div>
+        <div class="col-4">
+          Users registered per month:
+          <bar-chart class="space" :chart-data="usersDataCollection"></bar-chart>
+        </div>
+        <div class="col-4">
+          Number of games per category:
+          <pie-chart class="space" :chart-data="categoriesDataCollection"></pie-chart>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -16,10 +38,6 @@
   import LineChart from './LineChart.js';
   import BarChart from './BarChart.js';
   import PieChart from './PieChart.js';
-  
-  import sales from '../db/sales.json';
-  import users from '../db/users.json';
-  import categories from '../db/categories.json';
 
   export default {
     components: {
@@ -29,12 +47,27 @@
     },
     data () {
       return {
-        salesDataCollection: sales,
-        usersDataCollection: users,
-        categoriesDataCollection: categories,
+        salesDataCollection: {},
+        usersDataCollection: {},
+        categoriesDataCollection: {},
       }
     },
     mounted () {
+        fetch("http://dijkstra.cs.ttu.ee/~heisas/kasutajaliidesed/prax4/public/sales.json")
+            .then(resp => resp.json()).then(response => {
+              console.log(response);
+              this.salesDataCollection = response;
+        });
+        fetch("http://dijkstra.cs.ttu.ee/~heisas/kasutajaliidesed/prax4/public/users.json")
+            .then(resp => resp.json()).then(response => {
+              console.log(response);
+              this.usersDataCollection = response;
+        });
+        fetch("http://dijkstra.cs.ttu.ee/~heisas/kasutajaliidesed/prax4/public/categories.json")
+            .then(resp => resp.json()).then(response => {
+              console.log(response);
+              this.categoriesDataCollection = response;
+        })
 
     },
     methods: {
@@ -54,9 +87,13 @@
     margin: 0px;
   }
   h1 {
-    background: black;
     color: white;
-    margin-bottom: 40px;
+    margin: 0px;
+    padding: 10px 0px 0px 0px;
+  }
+  .header  {
+    background: black;
+    margin: 0px 0px 40px 0px;
     padding: 0px;
   }
   .small {
@@ -66,5 +103,14 @@
 
   .space {
     margin-bottom: 40px;
+  }
+
+  .col, .row, .container, .container-fluid {
+    padding: 0px !important;
+    margin: 0px !important;
+  }
+
+  .logo {
+    height: 70px;
   }
 </style>

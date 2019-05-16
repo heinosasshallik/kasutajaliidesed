@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/~heisas/kasutajaliidesed/prax3/'
+  publicPath: '/~heisas/kasutajaliidesed/prax4/'
 }
